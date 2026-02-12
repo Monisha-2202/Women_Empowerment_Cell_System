@@ -1,0 +1,19 @@
+# Women Empowerment Cell System
+
+## 📌 Project Description
+This project is a web-based system designed to manage Women Empowerment Cell activities in an institution. It provides modules for event management, grievance submission, feedback, and resource sharing.
+
+## 🛠 Technologies Used
+- HTML, CSS, JavaScript
+- Node.js 
+- MySQL Database
+- Bootstrap
+- GitHub
+
+## 🚀 Features
+- Student and Admin Login
+- Event Registration
+- Grievance Submission System
+- Feedback Module
+- Resource Sharing
+- Admin Panel Dashboard

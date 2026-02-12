@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Feedback - Women Empowerment Cell</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { background: #fff0f5; }
+    .banner {
+      background: linear-gradient(to right, #e91e63, #ff9800);
+      padding: 50px 0;
+      text-align: center;
+      color: white;
+    }
+    .form-container {
+      max-inline-size: 500px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    footer {
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-block-start: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-danger" href="index.html">Women Empowerment Cell</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="grievance.html">Grievance</a></li>
+        <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+        <li class="nav-item"><a class="nav-link active" href="feedback.html">Feedback</a></li>
+        <li class="nav-item"><a class="btn btn-primary ms-2" href="register.html">Register</a></li>
+        <li class="nav-item"><a class="btn btn-success ms-2" href="login.html">Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Banner -->
+<div class="banner">
+  <h1>Share Your Feedback</h1>
+</div>
+
+<!-- Form -->
+<div class="form-container">
+  <form id="feedbackForm">
+    <div class="mb-3">
+      <label for="user_id" class="form-label">User ID</label>
+      <input type="number" id="user_id" name="user_id" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="message" class="form-label">Message</label>
+      <textarea name="message" id="message" rows="4" class="form-control" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-danger w-100">Submit Feedback</button>
+    <p id="feedbackMsg" class="text-center text-success mt-3"></p>
+  </form>
+</div>
+
+<footer>
+  &copy; 2025 Women Empowerment Cell | All Rights Reserved
+</footer>
+
+<script>
+  document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const res = await fetch('/api/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user_id: form.user_id.value,
+        message: form.message.value
+      })
+    });
+    const data = await res.json();
+    document.getElementById('feedbackMsg').innerText = data.message;
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

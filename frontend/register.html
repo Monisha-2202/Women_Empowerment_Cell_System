@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Registration - Women Empowerment Cell</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #ededed, #ededed); /* Pink-Yellow Gradient */
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar-brand.gradient-text {
+      background: linear-gradient(to right, #ff4e50, #f9d423);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+    }
+
+    .banner {
+      background: linear-gradient(to right, #ff4e50, #f9d423); /* Matching Banner */
+      block-size: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgb(243, 120, 120);
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .form-container {
+      max-inline-size: 500px;
+      margin: 40px auto;
+      background: rgb(249, 249, 249);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(252, 252, 252, 0.1);
+    }
+
+    h2 {
+      color: #ff4e50;
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background-color: #ed7171;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #ec5858;
+    }
+
+    footer {
+      background-color: #343a40;
+      color: white;
+      padding: 12px;
+      text-align: center;
+      margin-block-start: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+    <div class="container">
+      <a class="navbar-brand gradient-text" href="index.html">Women Empowerment Cell</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="grievance.html">Grievance</a></li>
+          <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+          <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+          <li class="nav-item"><a class="btn btn-success ms-2" href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner -->
+  <div class="banner">
+    <h1 class="display-6">Register for an Event</h1>
+  </div>
+
+  <!-- Registration Form -->
+  <div class="form-container">
+    <h2 class="text-center mb-4">Event Registration</h2>
+    <form id="registerForm">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" name="name" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Select Event</label>
+        <select name="event_name" class="form-select" required>
+          <option value="">-- Choose an Event --</option>
+          <option value="Self-Defense Workshop">Self-Defense Workshop</option>
+          <option value="Career Guidance for Girls in STEM">Career Guidance for Girls in STEM</option>
+          <option value="Mental Health & Wellness Talk">Mental Health & Wellness Talk</option>
+          <option value="Cyber Safety for Women">Cyber Safety for Women</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Register</button>
+      <p id="registerMsg" class="mt-3 text-success text-center fw-semibold"></p>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Women Empowerment Cell | Designed for Impact
+  </footer>
+
+  <!-- Script -->
+  <script>
+  document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const res = await fetch('/api/register', {  <!-- ✅ This is step 4 -->
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: form.name.value,
+        email: form.email.value,
+        event_name: form.event_name.value
+      })
+    });
+
+    const data = await res.json();
+    document.getElementById('registerMsg').innerText = data.message;
+  });
+</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
